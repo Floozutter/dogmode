@@ -118,10 +118,10 @@ jar {
         attributes([
             "Specification-Title": "dogmode",
             "Specification-Vendor": "floozutter",
-            "Specification-Version": "1", // We are version 1 of ourselves
+            "Specification-Version": "${version}",
             "Implementation-Title": project.name,
-            "Implementation-Version": "${version}",
             "Implementation-Vendor" :"floozutter",
+            "Implementation-Version": "${version}",
             "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
         ])
     }
