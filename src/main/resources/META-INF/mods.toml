@@ -9,6 +9,4 @@ displayURL="http://www.floozutter.site/"
 logoFile="examplemod.png"
 credits="Hello, world!"
 authors="Floozutter"
-description='''
-A Minecraft cheat client for dogs!
-'''
+description="A Minecraft cheat client for dogs!"
