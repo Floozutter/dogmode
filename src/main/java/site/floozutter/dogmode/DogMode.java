@@ -22,37 +22,37 @@ import java.util.stream.Collectors;
 @Mod(DogMode.MODID)
 public final class DogMode {
 	public static final String MODID = "dogmode";
-    private static final Logger LOGGER = LogManager.getLogger();
+	private static final Logger LOGGER = LogManager.getLogger();
 
-    public DogMode() {
-        // Register modloading methods.
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::enqueueIMC);
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::processIMC);
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::doClientStuff);
+	public DogMode() {
+		// Register modloading methods.
+		FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
+		FMLJavaModLoadingContext.get().getModEventBus().addListener(this::enqueueIMC);
+		FMLJavaModLoadingContext.get().getModEventBus().addListener(this::processIMC);
+		FMLJavaModLoadingContext.get().getModEventBus().addListener(this::doClientStuff);
 
-        // Register ourselves for server and other game events we are interested in
-        MinecraftForge.EVENT_BUS.register(this);
+		// Register ourselves for server and other game events we are interested in
+		MinecraftForge.EVENT_BUS.register(this);
 
 		// Test logging.
 		LOGGER.info("AAAAA!!!!!");
-    }
+	}
 
 	// Examples.
-    private void setup(final FMLCommonSetupEvent event) {
-        LOGGER.info("HELLO FROM PREINIT");
-        LOGGER.info("DIRT BLOCK >> {}", Blocks.DIRT.getRegistryName());
-    }
-    private void doClientStuff(final FMLClientSetupEvent event) {
+	private void setup(final FMLCommonSetupEvent event) {
+		LOGGER.info("HELLO FROM PREINIT");
+		LOGGER.info("DIRT BLOCK >> {}", Blocks.DIRT.getRegistryName());
+	}
+	private void doClientStuff(final FMLClientSetupEvent event) {
 		// Client only.
-        LOGGER.info(
+		LOGGER.info(
 			"Got game settings {}",
 			event.getMinecraftSupplier().get().gameSettings
 		);
-    }
-    private void enqueueIMC(final InterModEnqueueEvent event) {
-        // Dispatch InterModComm to another mod.
-        InterModComms.sendTo(
+	}
+	private void enqueueIMC(final InterModEnqueueEvent event) {
+		// Dispatch InterModComm to another mod.
+		InterModComms.sendTo(
 			"dogmode",
 			"helloworld",
 			() -> {
@@ -60,32 +60,32 @@ public final class DogMode {
 				return "Hello world";
 			}
 		);
-    }
-    private void processIMC(final InterModProcessEvent event) {
+	}
+	private void processIMC(final InterModProcessEvent event) {
 		// Receive and process InterModComms from other mods.
-        LOGGER.info(
+		LOGGER.info(
 			"Got IMC {}",
 			event.getIMCStream().
-                map(m->m.getMessageSupplier().get()).
-                collect(Collectors.toList())
+				map(m->m.getMessageSupplier().get()).
+				collect(Collectors.toList())
 		);
-    }
+	}
 
 	// SubsribeEvent example to let the Event Bus discover methods to call.
-    @SubscribeEvent
-    public void onServerStarting(FMLServerStartingEvent event) {
-        // do something when the server starts
-        LOGGER.info("HELLO from server starting");
-    }
+	@SubscribeEvent
+	public void onServerStarting(FMLServerStartingEvent event) {
+		// do something when the server starts
+		LOGGER.info("HELLO from server starting");
+	}
 
-    // EventBusSubscriber example to automatically subscribe to events on the contained class.
-    // (This is subscribing to the MOD Event Bus for receiving Registry Events.)
-    @Mod.EventBusSubscriber(bus=Mod.EventBusSubscriber.Bus.MOD)
-    public static class RegistryEvents {
-        @SubscribeEvent
-        public static void onBlocksRegistry(final RegistryEvent.Register<Block> blockRegistryEvent) {
-            // (Register a new block here.)
-            LOGGER.info("HELLO from Register Block");
-        }
-    }
+	// EventBusSubscriber example to automatically subscribe to events on the contained class.
+	// (This is subscribing to the MOD Event Bus for receiving Registry Events.)
+	@Mod.EventBusSubscriber(bus=Mod.EventBusSubscriber.Bus.MOD)
+	public static class RegistryEvents {
+		@SubscribeEvent
+		public static void onBlocksRegistry(final RegistryEvent.Register<Block> blockRegistryEvent) {
+			// (Register a new block here.)
+			LOGGER.info("HELLO from Register Block");
+		}
+	}
 }
