@@ -19,9 +19,9 @@ import org.apache.logging.log4j.Logger;
 import java.util.stream.Collectors;
 
 
-@Mod("dogmode")
-public class DogMode {
-    // Directly reference a log4j logger.
+@Mod(DogMode.MODID)
+public final class DogMode {
+	public static final String MODID = "dogmode";
     private static final Logger LOGGER = LogManager.getLogger();
 
     public DogMode() {
