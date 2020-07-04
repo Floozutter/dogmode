@@ -1,7 +1,10 @@
 package site.floozutter.dogmode;
+import site.floozutter.dogmode.Keybinds;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
+import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -15,24 +18,14 @@ import net.minecraftforge.fml.event.server.FMLServerStartingEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
 import java.util.stream.Collectors;
-
-import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.fml.client.registry.ClientRegistry;
-import net.minecraft.client.settings.KeyBinding;
-import net.minecraftforge.event.TickEvent;
-import org.lwjgl.glfw.GLFW;
 
 
 @Mod(DogMode.MODID)
 @OnlyIn(Dist.CLIENT)
 public final class DogMode {
 	public static final String MODID = "dogmode";
-	private static final Logger LOGGER = LogManager.getLogger();
-	
-	static KeyBinding keyuwu;
+	public static final Logger LOGGER = LogManager.getLogger();
 
 	public DogMode() {
 		// Register modloading methods.
@@ -43,6 +36,7 @@ public final class DogMode {
 
 		// Register ourselves for server and other game events we are interested in
 		MinecraftForge.EVENT_BUS.register(this);
+		MinecraftForge.EVENT_BUS.register(Keybinds.class);
 
 		// Test logging.
 		LOGGER.info("AAAAA!!!!!");
@@ -60,8 +54,7 @@ public final class DogMode {
 			event.getMinecraftSupplier().get().gameSettings
 		);
 		
-		keyuwu = new KeyBinding("owo", GLFW.GLFW_KEY_Z, "OWO");
-		ClientRegistry.registerKeyBinding(keyuwu);
+		Keybinds.setup();
 	}
 	private void enqueueIMC(final InterModEnqueueEvent event) {
 		// Dispatch InterModComm to another mod.
@@ -99,13 +92,6 @@ public final class DogMode {
 		public static void onBlocksRegistry(final RegistryEvent.Register<Block> blockRegistryEvent) {
 			// (Register a new block here.)
 			LOGGER.info("HELLO from Register Block");
-		}
-	}
-	
-	@SubscribeEvent
-	public void uwu(TickEvent event) {
-		if (keyuwu.isPressed()) {
-			LOGGER.info("press me harder uwu");
 		}
 	}
 }
