@@ -18,11 +18,21 @@ import org.apache.logging.log4j.Logger;
 
 import java.util.stream.Collectors;
 
+import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.fml.client.registry.ClientRegistry;
+import net.minecraft.client.settings.KeyBinding;
+import net.minecraftforge.event.TickEvent;
+import org.lwjgl.glfw.GLFW;
+
 
 @Mod(DogMode.MODID)
+@OnlyIn(Dist.CLIENT)
 public final class DogMode {
 	public static final String MODID = "dogmode";
 	private static final Logger LOGGER = LogManager.getLogger();
+	
+	static KeyBinding keyuwu;
 
 	public DogMode() {
 		// Register modloading methods.
@@ -49,6 +59,9 @@ public final class DogMode {
 			"Got game settings {}",
 			event.getMinecraftSupplier().get().gameSettings
 		);
+		
+		keyuwu = new KeyBinding("owo", GLFW.GLFW_KEY_Z, "OWO");
+		ClientRegistry.registerKeyBinding(keyuwu);
 	}
 	private void enqueueIMC(final InterModEnqueueEvent event) {
 		// Dispatch InterModComm to another mod.
@@ -86,6 +99,13 @@ public final class DogMode {
 		public static void onBlocksRegistry(final RegistryEvent.Register<Block> blockRegistryEvent) {
 			// (Register a new block here.)
 			LOGGER.info("HELLO from Register Block");
+		}
+	}
+	
+	@SubscribeEvent
+	public void uwu(TickEvent event) {
+		if (keyuwu.isPressed()) {
+			LOGGER.info("press me harder uwu");
 		}
 	}
 }
