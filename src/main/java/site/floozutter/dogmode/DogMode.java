@@ -1,5 +1,8 @@
 package site.floozutter.dogmode;
+
 import site.floozutter.dogmode.Keybinds;
+import net.minecraft.client.settings.KeyBinding;
+import org.lwjgl.glfw.GLFW;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
@@ -34,7 +37,7 @@ public final class DogMode {
 		FMLJavaModLoadingContext.get().getModEventBus().addListener(this::processIMC);
 		FMLJavaModLoadingContext.get().getModEventBus().addListener(this::doClientStuff);
 
-		// Register ourselves for server and other game events we are interested in
+		// Register to EVENT_BUS.
 		MinecraftForge.EVENT_BUS.register(this);
 		MinecraftForge.EVENT_BUS.register(Keybinds.class);
 
@@ -54,6 +57,10 @@ public final class DogMode {
 			event.getMinecraftSupplier().get().gameSettings
 		);
 		
+		Keybinds.add(
+			new KeyBinding("owo", GLFW.GLFW_KEY_Z, "OWO"),
+			() -> LOGGER.info("press me harder uwu")
+		);
 		Keybinds.setup();
 	}
 	private void enqueueIMC(final InterModEnqueueEvent event) {
