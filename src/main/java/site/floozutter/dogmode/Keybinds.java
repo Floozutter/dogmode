@@ -4,13 +4,14 @@ import net.minecraft.client.settings.KeyBinding;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import java.util.ArrayList;
 
 
 public final class Keybinds {
 	private static ArrayList<BoundRunnable> binds;
 	
 	public static void add(KeyBinding binding, Runnable proc) {
-		binds.add(BoundRunnable(binding, proc));
+		binds.add(new BoundRunnable(binding, proc));
 	}
 	
 	public static void setup() {
@@ -26,7 +27,7 @@ public final class Keybinds {
 		private final KeyBinding binding;
 		private final Runnable proc;
 		
-		public BoundRunnable(Keybinding binding, Runnable proc) {
+		public BoundRunnable(KeyBinding binding, Runnable proc) {
 			this.binding = binding;
 			this.proc = proc;
 		}
