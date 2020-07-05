@@ -8,7 +8,9 @@ import java.util.ArrayList;
 
 
 public final class Keybinds {
-	private static ArrayList<BoundRunnable> binds;
+	private static ArrayList<BoundRunnable> binds = (
+		new ArrayList<BoundRunnable>()
+	);
 	
 	public static void add(KeyBinding binding, Runnable proc) {
 		binds.add(new BoundRunnable(binding, proc));
