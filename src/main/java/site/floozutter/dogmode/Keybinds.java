@@ -7,7 +7,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import java.util.ArrayList;
 
 
-public final class Keybinds {
+public final class KeyBinds {
 	private static ArrayList<BoundRunnable> binds = new ArrayList<>();
 	
 	public static void add(KeyBinding binding, Runnable proc) {

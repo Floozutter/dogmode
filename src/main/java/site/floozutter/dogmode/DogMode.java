@@ -1,6 +1,6 @@
 package site.floozutter.dogmode;
 
-import site.floozutter.dogmode.Keybinds;
+import site.floozutter.dogmode.KeyBinds;
 import net.minecraft.client.settings.KeyBinding;
 import org.lwjgl.glfw.GLFW;
 
@@ -39,7 +39,7 @@ public final class DogMode {
 
 		// Register to EVENT_BUS.
 		MinecraftForge.EVENT_BUS.register(this);
-		MinecraftForge.EVENT_BUS.register(Keybinds.class);
+		MinecraftForge.EVENT_BUS.register(KeyBinds.class);
 
 		// Test logging.
 		LOGGER.info("AAAAA!!!!!");
@@ -57,11 +57,11 @@ public final class DogMode {
 			event.getMinecraftSupplier().get().gameSettings
 		);
 		
-		Keybinds.add(
+		KeyBinds.add(
 			new KeyBinding("owo", GLFW.GLFW_KEY_Z, "OWO"),
 			() -> LOGGER.info("press me harder uwu")
 		);
-		Keybinds.setup();
+		KeyBinds.setup();
 	}
 	private void enqueueIMC(final InterModEnqueueEvent event) {
 		// Dispatch InterModComm to another mod.
