@@ -5,10 +5,11 @@ import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import java.util.ArrayList;
+import java.util.List;
 
 
 public final class KeyBinds {
-	private static ArrayList<BoundRunnable> binds = new ArrayList<>();
+	private static List<BoundRunnable> binds = new ArrayList<>();
 	
 	public static void add(KeyBinding binding, Runnable proc) {
 		binds.add(new BoundRunnable(binding, proc));
